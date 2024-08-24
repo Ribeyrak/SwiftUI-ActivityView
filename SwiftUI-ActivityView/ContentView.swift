@@ -8,14 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var isSharePresented = false
+    let customActivity = ActivityViewCustomActivity(activityName: "SomeApp",
+                                                    activityImageName: "tel4") {
+        print("Done")
+    }
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            
+            Button("Prees") {
+                isSharePresented = true
+            }
+            .sheet(isPresented: $isSharePresented) {
+                ActivityView(activityItems: ["Message Test"], applicationActivites: [customActivity])
+            }
+            
+            
         }
-        .padding()
+
     }
 }
 
